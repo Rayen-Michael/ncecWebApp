@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="NCEC">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>NCEC</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = "3329244605";
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script type="text/javascript" src="flutter.js" defer></script>
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script src="/__/firebase/9.22.1/firebase-app-compat.js"></script>
+<script src="/__/firebase/9.22.1/firebase-messaging-compat.js"></script>
+<script src="/__/firebase/init.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <!-- Background Image -->
+    <div class="background-image"></div>
+    
+    <!-- Centered Logo -->
+    <img class="centered-logo" src="Logo.png" alt="Logo">
+
+    <!-- Rotating Circle -->
+    <div class="rotating-circle"></div>
+  </div>
+  <style>body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0; /* Replace with your desired background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-image {
+  /* Replace 'path/to/background.jpg' with the path to your background image */
+  background-image: url('../Background.png');
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7; /* Adjust the opacity as needed */
+}
+
+.centered-logo {
+  /* Adjust the width and height of the logo as needed */
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rotating-circle {
+  /* Adjust the width and height of the circle as needed */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #fff; /* Replace with your desired color */
+  border-top: 5px solid rgb(255, 255, 255); /* Replace with your desired color */
+  animation: rotate 2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Hide the loading screen after your content is loaded */
+body.loaded #loadingScreen {
+  display: none;
+}
+</style>
+  <script>
+    // JavaScript to play the loading sound
+window.addEventListener('load', function() {
+  var audio = new Audio('../loading-sound.mp3');
+  audio.play();
+});
+
+// JavaScript to hide the loading screen after content is loaded
+document.addEventListener('DOMContentLoaded', function(ev) {
+  try {
+    // Check if the service worker is supported by the browser.
+    if ('serviceWorker' in navigator) {
+      // Register the service worker.
+      const registration = navigator.serviceWorker.register('/firebase-messaging-sw.js');
+
+      // Log the registration information (optional).
+      console.log('Service Worker registered:', registration);
+    } else {
+      console.log('Service Worker is not supported in this browser.');
+    }
+  } catch (error) {
+    console.error('Error registering Service Worker:', error);
+  }
+  var loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.opacity = 0;
+  setTimeout(function() {
+    loadingScreen.style.display = 'none';
+  }, 6000); // Adjust the delay as needed, 1000ms = 1 second
+  document.body.classList.add('loaded');
+        // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+});
+  //     window.OneSignal = window.OneSignal || [];
+  // OneSignal.push(function() {
+  //   OneSignal.init({
+  //     appId: "4a3ea95d-965f-4c9e-9304-41af3b4c3a3e",
+  //     safari_web_id: "web.onesignal.auto.26f438e4-4907-4b0f-9fba-4ab15d3b5c3b",
+  //     notifyButton: {
+  //       enable: true,
+  //     },
+  //   });
+        // Your web app's Firebase configuration
+      // Copy those from your Firebase account
+      // Project Settings > General > Web apps > Firebase SDK snippet
+      //
+      var firebaseConfig = {
+        apiKey: "AIzaSyDu5hGQHlFsWxO1VSGh4KyoEq3qvmQY45Y",
+        authDomain: "ncec-74eb6.firebaseapp.com",
+        databaseURL: "https://ncec-74eb6-default-rtdb.firebaseio.com",
+        projectId: "ncec-74eb6",
+        storageBucket: "ncec-74eb6.appspot.com",
+        messagingSenderId: "219227782156",
+        appId: "1:219227782156:web:476df54691253451364229",
+        measurementId: "G-PCXXJRXJ1H"
+      };
+
+      // Get this form you Firebase account
+      // Project Settings > Cloud Messaging > Web Configuration > Web Push certificates
+      var firebaseVapidKey = "BDKXyr5c7-JPPbtV0Um4wEWUOBmf6ar9kbvwAbOvCtGnE-wRR3LJ0hpSv53H7qbrqzS6W8mUK-RhWH8t2G2R95E";
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Initialize Messaging
+      const messaging = firebase.messaging();
+
+      checkPermissionsAndEnableFirebase();
+
+      // First request browser notification permissions
+      // For More Info: https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission
+      // DEPRECATION WARNING: messaging.requestPermission() has been deprecated
+      // ( https://firebase.google.com/docs/reference/js/firebase.messaging.Messaging#requestpermission )
+      function checkPermissionsAndEnableFirebase(){
+        // Check if the browser supports notifications
+        if (!("Notification" in window)) {
+          alert("This browser does not support desktop notification");
+        }
+
+        // Check whether notification permissions have already been granted
+        else if (Notification.permission === "granted") {
+          // If permissions have been granted,
+          // enable Firebase notifications.
+          console.log("Permission already granted");
+          enableFirebaseNotifications();
+        }
+
+        // Otherwise, ask user for permission
+        else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then(function (permission) {
+            // If the user accepts, enable Firebase Notifications
+            if (permission === "granted") {
+              console.log("Permission just granted");
+              enableFirebaseNotifications();
+            }
+          });
+        }
+      }
+
+      // Register Service Worker,
+      // get token,
+      // and handle foreground Firebase messages
+      //
+      function enableFirebaseNotifications() {
+        registerNotificationSW();
+        getDeviceToken();
+        handleForegroundMessages();
+      }
+
+      // Register your Service Worker.
+      // The Service Worker will handle background messages.
+      function registerNotificationSW() {
+        let registrationName = 'firebase-messaging-sw.js';
+        if('serviceWorker' in navigator
+            && !navigator.serviceWorker.getRegistration(registrationName)) {
+
+          navigator.serviceWorker.register(registrationName)
+                                    .then(function(registration) {
+                                      console.log("Service Worker Registered");
+                                      messaging.useServiceWorker(registration);
+                                    })
+                                    .catch(function(error) {
+                                      console.log("Service Worker could not be registered: ", error);
+                                    });
+        }
+      }
+
+      // Get Device Token
+      function getDeviceToken() {
+        messaging.getToken({ vapidKey: firebaseVapidKey })
+                     .then(function(token) {
+                       console.log('TOKEN: ', token);
+                      subscribeToTopic(token, "ElMo2tamar")
+                     })
+                     .catch(function(error) {
+                       console.log('Could not obtain TOKEN: ', error);
+                     });
+      }
+
+      function handleForegroundMessages() {
+        // Handle foreground message handling
+        // (when the user is looking at the tab)
+        messaging.onMessage((payload) => {
+          console.log('Foreground Message received: ', payload);
+        });
+      }
+
+      // Subscribe to a topic using the FCM token
+    function subscribeToTopic(token, topicName) {
+      fetch(`https://iid.googleapis.com/iid/v1/${token}/rel/topics/${topicName}`, {
+        method: 'POST',
+        headers: new Headers({
+          'Authorization': 'key=AAAAMwr-fAw:APA91bF8bQhdxAX1ms9nbpclMF1UNzAPoynj6iUMOprH86d5Uhs6nvCu_OkQsy35tEnmLGtrCYQE99-Fh86VbWiFzIe7_XkDuaaLKIH0fWfH8CKQyc4yn6MEHg5q2lgMg6v9xCnaCsMi'
+        })
+      }).then(function(response) {
+        if (response.status >= 200 && response.status < 400) {
+          console.log('Subscribed to topic successfully!');
+        } else {
+          console.log('Error subscribing to topic:', response);
+        }
+      }).catch(function(error) {
+        console.log('Error subscribing to topic:', error);
+      });
+    }
+
+  // });
+  </script>
+</body>
+</html>

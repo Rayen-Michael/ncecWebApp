@@ -1,0 +1,14 @@
+{
+  "name": "firebase-messaging-testing",
+  "version": "1.0.0",
+  "description": "This write-up aims to help you locate all the moving parts for\r setting up your Firebase Messaging for your web app.",
+  "main": "express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
